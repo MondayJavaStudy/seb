@@ -1,17 +1,20 @@
-package com.seb.javastudy;
+package main.com.seb.javastudy;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Main {
+public class ThreeCardsSelector {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        run(new InputStreamReader(System.in), new OutputStreamWriter(System.out));
+    }
+
+    public static void run(Reader reader, Writer writer) throws IOException{
+        BufferedReader in = new BufferedReader(reader);
+        PrintWriter out = new PrintWriter(writer);
 
         String input = in.readLine();
         String answer = in.readLine();
@@ -26,12 +29,14 @@ public class Main {
                 .sorted()
                 .collect(Collectors.toList());
 
-        List<int[]> answerPartArrays = getCorrectPartArrays(validNumList, Integer.parseInt(answer));
+        print(out, getCorrectPartArrays(validNumList, Integer.parseInt(answer)));
+    }
 
+    private static void print(PrintWriter out, List<int[]> answerPartArrays) {
         if (answerPartArrays.isEmpty()) {
-            System.out.println("NO");
+            out.println("NO");
         } else {
-            answerPartArrays.forEach(v -> System.out.println(Arrays.toString(v)));
+            answerPartArrays.forEach(v -> out.println(Arrays.toString(v)));
         }
     }
 
